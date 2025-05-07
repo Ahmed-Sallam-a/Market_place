@@ -1,0 +1,734 @@
+[
+    {
+        "model": "app.product",
+        "pk": 1,
+        "fields": {
+            "title": "ay7aa",
+            "selling_price": 11.0,
+            "discounted_price": 1000000000000000.0,
+            "description": "1",
+            "composition": "1",
+            "prodapp": "1",
+            "category": "CR",
+            "product_image": "product/IMG_2449.PNG",
+            "Quantity": 1
+        }
+    },
+    {
+        "model": "app.product",
+        "pk": 2,
+        "fields": {
+            "title": "Lion Chips",
+            "selling_price": 5.0,
+            "discounted_price": 4.99,
+            "description": "Spicy",
+            "composition": 0,
+            "prodapp": 0,
+            "category": "CDS",
+            "product_image": "product/lion chips.png",
+            "Quantity": 1
+        }
+    },
+    {
+        "model": "app.product",
+        "pk": 3,
+        "fields": {
+            "title": "El-Sa3a Rice 1kg",
+            "selling_price": 30.0,
+            "discounted_price": 38.0,
+            "description": "White rice 1 kg",
+            "composition": 0,
+            "prodapp": 0,
+            "category": "RP",
+            "product_image": "product/Elsa3a.png",
+            "Quantity": 10
+        }
+    },
+    {
+        "model": "app.product",
+        "pk": 4,
+        "fields": {
+            "title": "Italiano Rice 1kg",
+            "selling_price": 35.0,
+            "discounted_price": 40.0,
+            "description": "White Rice 1 Kg",
+            "composition": 0,
+            "prodapp": 0,
+            "category": "RP",
+            "product_image": "product/Italiano.png",
+            "Quantity": 10
+        }
+    },
+    {
+        "model": "app.product",
+        "pk": 5,
+        "fields": {
+            "title": "Regina Rice 1kg",
+            "selling_price": 35.0,
+            "discounted_price": 39.0,
+            "description": "White Rice 1 kg",
+            "composition": 0,
+            "prodapp": 0,
+            "category": "RP",
+            "product_image": "product/Regina.png",
+            "Quantity": 10
+        }
+    },
+    {
+        "model": "app.product",
+        "pk": 6,
+        "fields": {
+            "title": "El-Doha Rice 1kg",
+            "selling_price": 30.0,
+            "discounted_price": 35.0,
+            "description": "White Rice 1 KG",
+            "composition": 0,
+            "prodapp": 0,
+            "category": "RP",
+            "product_image": "product/ElDo7a.png",
+            "Quantity": 10
+        }
+    },
+    {
+        "model": "app.product",
+        "pk": 7,
+        "fields": {
+            "title": "Sofra Rice 1kg",
+            "selling_price": 28.0,
+            "discounted_price": 30.0,
+            "description": "White Rice 1 KG",
+            "composition": 0,
+            "prodapp": 0,
+            "category": "RP",
+            "product_image": "product/Sofra.png",
+            "Quantity": 10
+        }
+    },
+    {
+        "model": "app.product",
+        "pk": 8,
+        "fields": {
+            "title": "Tiger Chips",
+            "selling_price": 9.95,
+            "discounted_price": 10.0,
+            "description": "Thai sweet chili",
+            "composition": "0",
+            "prodapp": "0",
+            "category": "CDS",
+            "product_image": "product/tiger chips.png",
+            "Quantity": 1
+        }
+    },
+    {
+        "model": "app.product",
+        "pk": 9,
+        "fields": {
+            "title": "Pretzo",
+            "selling_price": 15.0,
+            "discounted_price": 13.0,
+            "description": "0 fat",
+            "composition": "0",
+            "prodapp": "0",
+            "category": "CDS",
+            "product_image": "product/pritzil.png",
+            "Quantity": 1
+        }
+    },
+    {
+        "model": "app.product",
+        "pk": 10,
+        "fields": {
+            "title": "popcorn",
+            "selling_price": 20.0,
+            "discounted_price": 19.5,
+            "description": "popcorn",
+            "composition": "0",
+            "prodapp": "0",
+            "category": "CDS",
+            "product_image": "product/popcorn.png",
+            "Quantity": 1
+        }
+    },
+    {
+        "model": "app.product",
+        "pk": 11,
+        "fields": {
+            "title": "puffs",
+            "selling_price": 16.25,
+            "discounted_price": 15.0,
+            "description": "Abu Auf",
+            "composition": "0",
+            "prodapp": "0",
+            "category": "CDS",
+            "product_image": "product/puffs.png",
+            "Quantity": 1
+        }
+    },
+    {
+        "model": "app.product",
+        "pk": 12,
+        "fields": {
+            "title": "packet menin Ajwa",
+            "selling_price": 100.0,
+            "discounted_price": 79.0,
+            "description": "10 pieces",
+            "composition": "0",
+            "prodapp": "0",
+            "category": "BP",
+            "product_image": "product/Packet_menin_Ajwa.png",
+            "Quantity": 100
+        }
+    },
+    {
+        "model": "app.product",
+        "pk": 13,
+        "fields": {
+            "title": "Crossant",
+            "selling_price": 100.0,
+            "discounted_price": 94.0,
+            "description": "10 pieces",
+            "composition": "0",
+            "prodapp": "0",
+            "category": "BP",
+            "product_image": "product/Croissant.png",
+            "Quantity": 100
+        }
+    },
+    {
+        "model": "app.product",
+        "pk": 14,
+        "fields": {
+            "title": "Rich Bake Bread Crumbs",
+            "selling_price": 20.0,
+            "discounted_price": 19.0,
+            "description": "400g",
+            "composition": "0",
+            "prodapp": "0",
+            "category": "BP",
+            "product_image": "product/Rich_Bake_Bread_Crumbs.png",
+            "Quantity": 80
+        }
+    },
+    {
+        "model": "app.product",
+        "pk": 15,
+        "fields": {
+            "title": "Rich Bake Crispy Chicken",
+            "selling_price": 45.0,
+            "discounted_price": 40.0,
+            "description": "170g",
+            "composition": "0",
+            "prodapp": "0",
+            "category": "BP",
+            "product_image": "product/Rich_Bake_Crispy_Chicken.png",
+            "Quantity": 75
+        }
+    },
+    {
+        "model": "app.product",
+        "pk": 16,
+        "fields": {
+            "title": "Rich Bake Toast Bread",
+            "selling_price": 50.0,
+            "discounted_price": 44.0,
+            "description": "500g",
+            "composition": "0",
+            "prodapp": "0",
+            "category": "BP",
+            "product_image": "product/Rich_Bake_Toast_Bread.png",
+            "Quantity": 50
+        }
+    },
+    {
+        "model": "app.product",
+        "pk": 17,
+        "fields": {
+            "title": "Kandooz Meat",
+            "selling_price": 400,
+            "discounted_price": 350,
+            "description": "1kg",
+            "composition": "0",
+            "prodapp": "0",
+            "category": "MP",
+            "product_image": "product/kandooz.png",
+            "Quantity": 30
+        }
+    },
+    {
+        "model": "app.product",
+        "pk": 18,
+        "fields": {
+            "title": "Mafroom Meat",
+            "selling_price": 390,
+            "discounted_price": 340,
+            "description": "1kg",
+            "composition": "0",
+            "prodapp": "0",
+            "category": "MP",
+            "product_image": "product/mafroom.png",
+            "Quantity": 300
+        }
+    },
+
+    {
+        "model": "app.product",
+        "pk": 19,
+        "fields": {
+            "title": "Balady Meat",
+            "selling_price": 450,
+            "discounted_price": 400,
+            "description": "1kg",
+            "composition": "0",
+            "prodapp": "0",
+            "category": "MP",
+            "product_image": "product/balady.png",
+            "Quantity": 300
+        }
+    },
+
+    {
+        "model": "app.product",
+        "pk": 20,
+        "fields": {
+            "title": "Chicken Pane",
+            "selling_price": 230,
+            "discounted_price": 200,
+            "description": "1kg",
+            "composition": "0",
+            "prodapp": "0",
+            "category": "MP",
+            "product_image": "product/baneh.png",
+            "Quantity": 300
+        }
+    },
+
+    {
+        "model": "app.product",
+        "pk": 21,
+        "fields": {
+            "title": "Gillette",
+            "selling_price": 300,
+            "discounted_price": 250,
+            "description": "Gillette Blue3 Comfort Men's Disposable 9+3 Razor",
+            "composition": "0",
+            "prodapp": "0",
+            "category": "PC",
+            "product_image": "product/Gillette.png",
+            "Quantity": 300
+        }
+    },
+
+    {
+        "model": "app.product",
+        "pk": 22,
+        "fields": {
+            "title": "Signal Toothpaste",
+            "selling_price": 40,
+            "discounted_price": 37,
+            "description": "Signal Cavity Fighter Toothpaste - 120 Ml",
+            "composition": "0",
+            "prodapp": "0",
+            "category": "PC",
+            "product_image": "product/Signal.png",
+            "Quantity": 300
+        }  
+    },
+    {
+        "model": "app.product",
+        "pk": 23,
+        "fields": {
+            "title": "Pantene Shampoo",
+            "selling_price": 300,
+            "discounted_price": 287,
+            "description": "Pantene Pro-V Anti-Hair Fall Shampoo for Fine Weak Hair - 1000ml",
+            "composition": "0",
+            "prodapp": "0",
+            "category": "PC",
+            "product_image": "product/Pantene.png",
+            "Quantity": 300
+        }
+        
+    },
+    {
+        "model": "app.product",
+        "pk": 24,
+        "fields": {
+            "title": "Nivea Men Antiperspirant",
+            "selling_price": 95,
+            "discounted_price": 88,
+            "description": "Nivea Men Antiperspirant Spray for Men - Deep Black Carbon Antibacterial - Dark Wood Scent - 150ml",
+            "composition": "0",
+            "prodapp": "0",
+            "category": "PC",
+            "product_image": "product/Nivea.png",
+            "Quantity": 300
+        }
+        
+    },
+    {
+        "model": "app.product",
+        "pk": 25,
+        "fields": {
+            "title": "Vaseline",
+            "selling_price": 192,
+            "discounted_price": 185,
+            "description": "Vaseline Cocoa Rediant Body Lotion - 400 ml",
+            "composition": "0",
+            "prodapp": "0",
+            "category": "PC",
+            "product_image": "product/Vaseline.png",
+            "Quantity": 300
+        }
+        
+    },
+    {
+        "model": "app.product",
+        "pk": 26,
+        "fields": {
+            "title": "Bakhero Milk",
+            "selling_price": 36,
+            "discounted_price": 34,
+            "description": "Bekhero Full Cream Milk - 1 Liter",
+            "composition": "0",
+            "prodapp": "0",
+            "category": "D",
+            "product_image": "product/Bakhero.png",
+            "Quantity": 300
+        }
+        
+    },
+    {
+        "model": "app.product",
+        "pk": 27,
+        "fields": {
+            "title": "Juhyna Milk",
+            "selling_price": 65,
+            "discounted_price": 59,
+            "description": "Juhayna Full Cream Milk - 1.5 Liter",
+            "composition": "0",
+            "prodapp": "0",
+            "category": "D",
+            "product_image": "product/Juhyna.png",
+            "Quantity": 300
+        }
+        
+    },
+    {
+        "model": "app.product",
+        "pk": 28,
+        "fields": {
+            "title": "Lamar Milk",
+            "selling_price": 42,
+            "discounted_price": 40,
+            "description": "Lamar Full Cream Milk - 1 Liter",
+            "composition": "0",
+            "prodapp": "0",
+            "category": "D",
+            "product_image": "product/Lamar.png",
+            "Quantity": 300
+        }   
+    },
+    {
+        "model": "app.product",
+        "pk": 29,
+        "fields": {
+            "title": "Juhayna Mix Strawberry",
+            "selling_price": 15,
+            "discounted_price": 12,
+            "description": "Juhayna Mix Strawberry Milk - 200ml",
+            "composition": "0",
+            "prodapp": "0",
+            "category": "D",
+            "product_image": "product/Mix.png",
+            "Quantity": 300
+        }   
+    },
+    {
+        "model": "app.product",
+        "pk": 30,
+        "fields": {
+            "title": "Almarai Treats Banana Milk",
+            "selling_price": 11,
+            "discounted_price": 9,
+            "description": "Almarai Treats Banana Milk - 200 ml",
+            "composition": "0",
+            "prodapp": "0",
+            "category": "D",
+            "product_image": "product/Almarai.png",
+            "Quantity": 300
+        }   
+    },
+    {
+        "model": "app.product",
+        "pk": 31,
+        "fields": {
+            "title": "Juhayna Skimmed Milk",
+            "selling_price": 11,
+            "discounted_price": 9,
+            "description": "Juhayna Skimmed Milk - 1.5 Liter",
+            "composition": "0",
+            "prodapp": "0",
+            "category": "D",
+            "product_image": "product/Skimmed.png",
+            "Quantity": 300
+        }   
+    },
+    {
+        "model": "app.product",
+        "pk": 32,
+        "fields": {
+            "title": "Romy Batarekh Cheese",
+            "selling_price": 70,
+            "discounted_price": 67,
+            "description": "Romy Batarekh Cheese - 250gm",
+            "composition": "0",
+            "prodapp": "0",
+            "category": "D",
+            "product_image": "product/Romy.png",
+            "Quantity": 300
+        }   
+    },
+    {
+        "model": "app.product",
+        "pk": 33,
+        "fields": {
+            "title": "La Vache Qui Rit Cheese",
+            "selling_price": 67,
+            "discounted_price": 63,
+            "description": "La Vache Qui Rit Triangle Cheese - 24 Pieces",
+            "composition": "0",
+            "prodapp": "0",
+            "category": "D",
+            "product_image": "product/LaV.png",
+            "Quantity": 300
+        }   
+    },
+    {
+        "model": "app.product",
+        "pk": 34,
+        "fields": {
+            "title": "Domty Feta Natural Cheese",
+            "selling_price": 82,
+            "discounted_price": 80,
+            "description": "Domty Feta Natural Cheese - 500 gm",
+            "composition": "0",
+            "prodapp": "0",
+            "category": "D",
+            "product_image": "product/Domty.png",
+            "Quantity": 300
+        }   
+    },
+    {
+        "model": "app.product",
+        "pk": 35,
+        "fields": {
+            "title": "Oxi Gel Laundry Detergent",
+            "selling_price": 253,
+            "discounted_price": 238,
+            "description": "Oxi Gel Laundry Detergent with Lavender Scent - 4 Liter",
+            "composition": "0",
+            "prodapp": "0",
+            "category": "LD",
+            "product_image": "product/Oxi.png",
+            "Quantity": 300
+        }   
+    },
+    {
+        "model": "app.product",
+        "pk": 36,
+        "fields": {
+            "title": "Persil Automatic Powder Detergent",
+            "selling_price": 433,
+            "discounted_price": 344,
+            "description": "Persil Automatic Powder Detergent with Rose - 8 kg",
+            "composition": "0",
+            "prodapp": "0",
+            "category": "LD",
+            "product_image": "product/Persel.png",
+            "Quantity": 300
+        }   
+    },
+    {
+        "model": "app.product",
+        "pk": 37,
+        "fields": {
+            "title": "Comfort Flora Soft Fabric Softener",
+            "selling_price": 180,
+            "discounted_price": 163,
+            "description": "Comfort Flora Soft Fabric Softener - 3 Liter",
+            "composition": "0",
+            "prodapp": "0",
+            "category": "LD",
+            "product_image": "product/Comfort.png",
+            "Quantity": 300
+        }   
+    },
+    {
+        "model": "app.product",
+        "pk": 38,
+        "fields": {
+            "title": "Clorox Liquid Bleach",
+            "selling_price": 32,
+            "discounted_price": 28,
+            "description": "Clorox Liquid Bleach - 1.2 Liter",
+            "composition": "0",
+            "prodapp": "0",
+            "category": "LD",
+            "product_image": "product/Clorox.png",
+            "Quantity": 300
+        }   
+    },
+    {
+        "model": "app.product",
+        "pk": 39,
+        "fields": {
+            "title": "Vanish Liquid Stain Remover",
+            "selling_price": 150,
+            "discounted_price": 112,
+            "description": "Vanish Liquid Stain Remover - 450ml",
+            "composition": "0",
+            "prodapp": "0",
+            "category": "LD",
+            "product_image": "product/Vanish.png",
+            "Quantity": 300
+        }   
+    },
+    {
+        "model": "app.product",
+        "pk": 40,
+        "fields": {
+            "title": "Cucumber",
+            "selling_price": 7,
+            "discounted_price": 6.5,
+            "description": "Cucumber - 500 gram",
+            "composition": "0",
+            "prodapp": "0",
+            "category": "FV",
+            "product_image": "product/Cucumber.png",
+            "Quantity": 300
+        }   
+    },
+    {
+        "model": "app.product",
+        "pk": 41,
+        "fields": {
+            "title": "Onion",
+            "selling_price": 8,
+            "discounted_price": 7,
+            "description": "Onion - 500 gram",
+            "composition": "0",
+            "prodapp": "0",
+            "category": "FV",
+            "product_image": "product/Onion.png",
+            "Quantity": 300
+        }   
+    },
+    {
+        "model": "app.product",
+        "pk": 42,
+        "fields": {
+            "title": "Potato",
+            "selling_price": 7,
+            "discounted_price": 6.5,
+            "description": "Potato - 500 gram",
+            "composition": "0",
+            "prodapp": "0",
+            "category": "FV",
+            "product_image": "product/Potato.png",
+            "Quantity": 300
+        }   
+    },
+    {
+        "model": "app.product",
+        "pk": 43,
+        "fields": {
+            "title": "Carrot",
+            "selling_price": 6,
+            "discounted_price": 5,
+            "description": "Carrot - 500 gram",
+            "composition": "0",
+            "prodapp": "0",
+            "category": "FV",
+            "product_image": "product/Carrot.png",
+            "Quantity": 300
+        }   
+    },
+    {
+        "model": "app.product",
+        "pk": 44,
+        "fields": {
+            "title": "American Apple",
+            "selling_price": 40,
+            "discounted_price": 35.5,
+            "description": "American Apple - 500 gram",
+            "composition": "0",
+            "prodapp": "0",
+            "category": "FV",
+            "product_image": "product/Apple.png",
+            "Quantity": 300
+        }   
+    },
+    {
+        "model": "app.product",
+        "pk": 45,
+        "fields": {
+            "title": "Watermelon",
+            "selling_price": 120,
+            "discounted_price": 99.99,
+            "description": "Watermelon - 10kg",
+            "composition": "0",
+            "prodapp": "0",
+            "category": "FV",
+            "product_image": "product/Watermelon.png",
+            "Quantity": 300
+        }   
+    },
+    {
+        "model": "app.product",
+        "pk": 46,
+        "fields": {
+            "title": "Banana",
+            "selling_price": 25,
+            "discounted_price": 22,
+            "description": "Banana - 500 gram",
+            "composition": "0",
+            "prodapp": "0",
+            "category": "FV",
+            "product_image": "product/Banana.png",
+            "Quantity": 300
+        }   
+    },
+    {
+        "model": "app.product",
+        "pk": 47,
+        "fields": {
+            "title": "Lemon",
+            "selling_price": 30,
+            "discounted_price": 26,
+            "description": "Lemon - 500 gram",
+            "composition": "0",
+            "prodapp": "0",
+            "category": "FV",
+            "product_image": "product/Lemon.png",
+            "Quantity": 300
+        }   
+    },
+    {
+        "model": "app.product",
+        "pk": 48,
+        "fields": {
+            "title": "Pico BlueBerries",
+            "selling_price": 120,
+            "discounted_price": 100,
+            "description": "BlueBerries - 500 gram",
+            "composition": "0",
+            "prodapp": "0",
+            "category": "FV",
+            "product_image": "product/Blue.png",
+            "Quantity": 300
+        }   
+    }
+
+
+    
+]
