@@ -5,159 +5,96 @@
 <!-- Assign the page title -->
 {% block title %}Home{% endblock title %}
 
-{% block banner-slider %}
-  <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
-    <div class="carousel-inner">
-     <div class="carousel-item active">
-        <img src="{% static "app/images/banner/Banner.png" %}" class="d-block w-100" alt="banner image" style="height:93vh;">
-      </div>
-      {% comment %} <div class="carousel-item">
-        <img src="{% static "app/images/banner/b2.jpg" %}" class="d-block w-100" alt="banner image" style="height:90vh;">
-      </div>
-      <div class="carousel-item">
-        <img src="{% static "app/images/banner/b3.jpg" %}" class="d-block w-100" alt="banner image" style="height:90vh;">
-      </div> {% endcomment %}
-      <!-- <div class="carousel-item">
-        <img src="{% static "app/images/banner/b4.jpg" %}" class="d-block w-100" alt="banner image"style="height:90vh;">
-      </div>  -->
-    
-    </div>
-  </div>
-{% endblock banner-slider %}
-
-
-{% block information %}
-
-<div class="container">
-      
-      <div class="row text-center p-5 text-white border-bottom shadow" style ="background-color:#6d2932 ; margin-top: 50px; ">
-             <h1>Products</h1>
-             <small class="fs-5">A large supermarket typically offers a wide range of products 
-              across various categories to meet the diverse needs of shoppers.
-              This includes fresh produce such as fruits and vegetables, 
-              dairy products like milk and cheese, meats, 
-              packaged foods including snacks, chips
-              , as well as household essentials like cleaning supplies
-              , Personal care items. 
-              Additionally, supermarkets often feature a bakery section with freshly baked bread and pastries.
-             </small>
-      </div>  
-
-
-</div>
-
-{% endblock information %}
-
-
-
-
 {% block main-content %}
 <div class="container">
-    <h2 class="text-center" style="padding-top: 40px;">Categories</h2>
-    <br><br>
-  
-    <div class="row">
-      <div class="col-md-4 mi-go wow fadeInUp"
-           data-wow-duration="1s" data-wow-delay="0.6s" >
-        <div class="goodnessec buttermilk smbg" style="height: 300px;">
-          <a href="{% url 'category' 'RP' %}">
-            <div class="goodnesseccont test-center" style="height: 100%;width:100%;display: flex; justify-content: center; align-items: center;flex-direction: column;">
-              <img src="{% static 'app/images/product/Rice.png' %}"
-                   class="img-responsive center-block" alt="" style="max-width: 100%;max-height:80%;min-width:60%;">
-              <p class="mlkpro">Rice and Pasta</p>
-            </div>
-          </a>
+    <!-- Hero Section -->
+    <div class="row text-center py-5 mb-5" style="background-color: #f8f9fa; border-radius: 10px; margin-top: 20px;">
+        <div class="col-md-8 mx-auto">
+            <h1 class="display-4 mb-4">Welcome to BuyZone</h1>
+            <p class="lead">Your one-stop marketplace for all your needs. Find great deals on vehicles, property, electronics, and more.</p>
         </div>
-      </div>
-  
-      <div class="col-md-4 mi-go wow fadeInUp"
-           data-wow-duration="1s" data-wow-delay="0.6s">
-        <div class="goodnessec buttermilk curdbgpro" style="height: 300px;">
-          <a href="{% url 'category' 'MP' %}">
-            <div class="goodnesseccont test-center" style="height: 100%;width:100%;display: flex; justify-content: center; align-items: center;flex-direction: column;">
-              <img src="{% static 'app/images/product/Meat.png' %}"
-                   class="img-responsive center-block" alt="" style="max-width: 100%;max-height:80%;min-width:60%;">
-              <p class="mlkpro">Meat & Poultry</p>
-            </div>
-          </a>
-        </div>
-      </div>
-  
-      <div class="col-md-4 mi-go wow fadeInUp"
-           data-wow-duration="1s" data-wow-delay="0.6s">
-        <div class="goodnessec buttermilk buttermilk" style="height: 300px;">
-          <a href="{% url 'category' 'D' %}">
-            <div class="goodnesseccont test-center" style="height: 100%;width:100%;display: flex; justify-content: center; align-items: center;flex-direction: column;">
-              <img src="{% static 'app/images/product/Dairy.png' %}"
-                   class="img-responsive center-block" alt="" style="max-width:100%;max-height:80%;min-width:60%;">
-              <p class="mlkpro">Dairy</p>
-            </div>
-          </a>
-        </div>
-      </div>
     </div>
 
-    <br><br>
+    <!-- Featured Products Section -->
+    <section class="mb-5">
+        <h2 class="text-center mb-4">Featured Products</h2>
+        <div class="row">
+            {% for product in featured_products %}
+            <div class="col-md-3 mb-4">
+                <div class="card h-100 shadow-sm">
+                    <img src="{{ product.product_image.url }}" class="card-img-top" alt="{{ product.title }}" style="height: 200px; object-fit: cover;">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ product.title }}</h5>
+                        <p class="card-text text-muted">{{ product.get_category_display }}</p>
+                        <p class="card-text fw-bold text-primary">${{ product.selling_price }}</p>
+                        <div class="d-flex justify-content-between">
+                            <a href="{% url 'product-detail' product.id %}" class="btn btn-outline-primary">View Details</a>
+                            {% if product.status == 'available' %}
+                            <form action="{% url 'add_to_cart' %}" method="get" class="d-inline">
+                                <input type="hidden" name="prod_id" value="{{ product.id }}">
+                                <button type="submit" class="btn btn-primary">Add to Cart</button>
+                            </form>
+                            {% else %}
+                            <button class="btn btn-secondary" disabled>Sold Out</button>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
 
-    <div class="row">
-        <div class="col-md-4 mi-go wow fadeInUp"
-             data-wow-duration="1s" data-wow-delay="0.6s">
-          <div class="goodnessec buttermilk smbg" style="height: 300px;">
-            <a href="{% url 'category' 'CDS' %}" style="text-decoration: none;">
-              <div class="goodnesseccont test-center" style="height: 100%;width:100%;display: flex; justify-content: center; align-items: center;flex-direction: column;">
-                <img src="{% static 'app/images/product/Chips.png' %}"
-                     class="img-responsive center-block" alt="" style="max-width:100%;max-height:80%;min-width:60%">
-                <p class="mlkpro">Chips,Dips & Snacks</p>
-              </div>
-            </a>
-          </div>
+    <!-- Categories Section -->
+    {% for category_name, products in category_products.items %}
+    <section class="mb-5">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2>{{ category_name }}</h2>
+            <a href="{% url 'category' category_name|lower %}" class="btn btn-outline-primary">View All</a>
         </div>
-    
-        <div class="col-md-4 mi-go wow fadeInUp"
-             data-wow-duration="1s" data-wow-delay="0.6s">
-          <div class="goodnessec buttermilk curdbgpro" style="height: 300px;">
-            <a href="{% url 'category' 'BP' %}">
-              <div class="goodnesseccont test-center" style="height: 100%;width:100%;display: flex; justify-content: center; align-items: center;flex-direction: column;">
-                <img src="{% static 'app/images/product/Bakery.png' %}"
-                     class="img-responsive center-block" alt="" style="max-width:100%;max-height:80%;min-width:60%">
-                <p class="mlkpro">Bakery & Pastry</p>
-              </div>
-            </a>
-          </div>
+        <div class="row">
+            {% for product in products %}
+            <div class="col-md-3 mb-4">
+                <div class="card h-100 shadow-sm">
+                    <img src="{{ product.product_image.url }}" class="card-img-top" alt="{{ product.title }}" style="height: 200px; object-fit: cover;">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ product.title }}</h5>
+                        <p class="card-text text-muted">{{ product.brand }}</p>
+                        <p class="card-text fw-bold text-primary">${{ product.selling_price }}</p>
+                        <div class="d-flex justify-content-between">
+                            <a href="{% url 'product-detail' product.id %}" class="btn btn-outline-primary">View Details</a>
+                            {% if product.status == 'available' %}
+                            <form action="{% url 'add_to_cart' %}" method="get" class="d-inline">
+                                <input type="hidden" name="prod_id" value="{{ product.id }}">
+                                <button type="submit" class="btn btn-primary">Add to Cart</button>
+                            </form>
+                            {% else %}
+                            <button class="btn btn-secondary" disabled>Sold Out</button>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
         </div>
-    
-        <div class="col-md-4 mi-go wow fadeInUp"
-             data-wow-duration="1s" data-wow-delay="0.6s">
-          <div class="goodnessec buttermilk buttermilk" style="height: 300px;">
-            <a href="{% url 'category' 'FV' %}">
-              <div class="goodnesseccont test-center" style="height: 100%;width:100%;display: flex; justify-content: center; align-items: center;flex-direction: column;">
-                <img src="{% static 'app/images/product/Fruits.png' %}"
-                     class="img-responsive center-block" alt="" style="max-width:100%;max-height:80%;min-width:60%">
-                <p class="mlkpro">Fruits & Vegetables</p>
-              </div>
-            </a>
-          </div>
-        </div>
-      </div>
-  </div>
+    </section>
+    {% endfor %}
+</div>
 
-  <div class="container mt-5 text-white"  style ="background-color:#6d2932 ;">
-    <br>
-    <h2 class="text-center">About Us</h2>
-    <br>
-    <div class="row container">
-        <p class="fs-4 text-center">
-            This is a public limited company having its registered and corporate office at 
-            Giza Governorate in Egypt. The company was incorporated in the year 
-            2022 and production commenced in 2024.
-            This is one of the fastest growing public listed companies in Egypt.
-        </p>
-    
+<!-- About Section -->
+<div class="container-fluid py-5" style="background-color: #6d2932; margin-top: 50px;">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 mx-auto text-center text-white">
+                <h2 class="mb-4">About BuyZone</h2>
+                <p class="lead">
+                    This is a public limited company having its registered and corporate office at 
+                    Giza Governorate in Egypt. The company was incorporated in the year 
+                    2022 and production commenced in 2024.
+                    This is one of the fastest growing public listed companies in Egypt.
+                </p>
+            </div>
+        </div>
     </div>
-  </div>
-  
 </div>
-  
-</div>
-
 {% endblock main-content %}

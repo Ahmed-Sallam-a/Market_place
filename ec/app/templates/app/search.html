@@ -1,27 +1,47 @@
 {% extends 'app/base.html' %}
 {% load static %}
-{% block title %} Search Result{% endblock title %}
+{% block title %}Search Results{% endblock title %}
 {% block main-content %}
 <div class="container my-5">
     <div class="row">
-        <div class="col-sm-8">
-            <div class="row">
-                {% for prod in product %}
-                    <div class="col-sm-4 text-center mb-4 hover-shadow">
-                        <a href="{% url 'product-detail' prod.id %}" class="btn">
-                            <div>
-                                <img src="{{prod.product_image.url}}" 
-                                style="max-width: 250px; max-height: 200px; width: 100%; height: 200px; display: block; margin: 0 auto;" />
-                                <div class="fw-bold">{{prod.title}}</div>
-                                <div class="fw-bold text-danger">
-                                    EGP.{{prod.discounted_price}}/-
-                                    <small class="fw-light text-decoration-line-through">{{prod.selling_price}}</small>
+        <div class="col-sm-8 offset-sm-2 mb-4">
+            <form action="{% url 'search' %}" method="get" class="d-flex">
+                <input type="text" name="q" class="form-control me-2" placeholder="Search products..." value="{{ query }}">
+                <button type="submit" class="btn btn-primary">Search</button>
+            </form>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            {% if query %}
+                <h4 class="mb-4">Search results for "{{ query }}"</h4>
+            {% endif %}
+            {% if products %}
+                <div class="row">
+                    {% for prod in products %}
+                        <div class="col-sm-4 text-center mb-4 hover-shadow">
+                            <a href="{% url 'product-detail' prod.id %}" class="btn">
+                                <div>
+                                    <img src="{{prod.product_image.url}}" 
+                                    style="max-width: 250px; max-height: 200px; width: 100%; height: 200px; display: block; margin: 0 auto;" />
+                                    <div class="fw-bold">{{prod.title}}</div>
+                                    <div class="fw-bold text-danger">
+                                        ${{prod.selling_price}}
+                                        {% if prod.discounted_price %}
+                                            <small class="fw-light text-decoration-line-through">${{prod.discounted_price}}</small>
+                                        {% endif %}
+                                    </div>
                                 </div>
-                            </div>
-                        </a>
-                    </div>
-                {% endfor %}
-            </div>
+                            </a>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <div class="text-center">
+                    <h4>No products found</h4>
+                    <p>Try different keywords or browse our categories</p>
+                </div>
+            {% endif %}
         </div>
     </div>
 </div>

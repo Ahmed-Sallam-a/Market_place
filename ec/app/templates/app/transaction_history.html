@@ -1,0 +1,169 @@
+{% extends 'app/base.html' %}
+{% load static %}
+{% block title %}Transaction History{% endblock title %}
+{% block main-content %}
+<div class="container my-5">
+    <div class="row">
+        <div class="col-sm-3">
+            <div class="list-group">
+                <a href="{% url 'seller-dashboard' %}" class="list-group-item list-group-item-action">Dashboard</a>
+                <a href="{% url 'seller-products' %}" class="list-group-item list-group-item-action">My Products</a>
+                <a href="{% url 'seller-orders' %}" class="list-group-item list-group-item-action">Orders</a>
+                <a href="{% url 'seller-reports' %}" class="list-group-item list-group-item-action active">Reports</a>
+            </div>
+        </div>
+        <div class="col-sm-9">
+            <div class="row mb-4">
+                <div class="col-sm-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Total Spent</h5>
+                            <h3 class="card-text" id="total-spent">$0.00</h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Total Earned</h5>
+                            <h3 class="card-text" id="total-earned">$0.00</h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Net Balance</h5>
+                            <h3 class="card-text" id="net-balance">$0.00</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h5 class="card-title">Transaction History</h5>
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Type</th>
+                                    <th>Product</th>
+                                    <th>Amount</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody id="transactions-table">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Top Products</h5>
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>Product</th>
+                                            <th>Sales</th>
+                                            <th>Amount</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="top-products">
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Transaction Types</h5>
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>Type</th>
+                                            <th>Count</th>
+                                            <th>Amount</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="transaction-types">
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Load transaction summary
+    fetch('/api/transactions/summary/')
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById('total-spent').textContent = `$${data.total_spent.toFixed(2)}`;
+            document.getElementById('total-earned').textContent = `$${data.total_earned.toFixed(2)}`;
+            document.getElementById('net-balance').textContent = `$${data.net_balance.toFixed(2)}`;
+        });
+
+    // Load transaction history
+    fetch('/api/transactions/history/')
+        .then(response => response.json())
+        .then(data => {
+            const tbody = document.getElementById('transactions-table');
+            data.forEach(transaction => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${new Date(transaction.created_at).toLocaleDateString()}</td>
+                    <td>${transaction.transaction_type}</td>
+                    <td>${transaction.product ? transaction.product.title : 'N/A'}</td>
+                    <td>$${transaction.amount}</td>
+                    <td>${transaction.status}</td>
+                `;
+                tbody.appendChild(row);
+            });
+        });
+
+    // Load detailed report
+    fetch('/api/transactions/detailed_report/')
+        .then(response => response.json())
+        .then(data => {
+            // Populate top products
+            const topProducts = document.getElementById('top-products');
+            data.top_products.forEach(product => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${product.product__title}</td>
+                    <td>${product.count}</td>
+                    <td>$${product.total_amount.toFixed(2)}</td>
+                `;
+                topProducts.appendChild(row);
+            });
+
+            // Populate transaction types
+            const transactionTypes = document.getElementById('transaction-types');
+            data.transaction_types.forEach(type => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${type.transaction_type}</td>
+                    <td>${type.count}</td>
+                    <td>$${type.total_amount.toFixed(2)}</td>
+                `;
+                transactionTypes.appendChild(row);
+            });
+        });
+});
+</script>
+{% endblock main-content %} 

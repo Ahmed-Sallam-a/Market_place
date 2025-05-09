@@ -1,135 +1,124 @@
-$('#slider1, #slider2, #slider3').owlCarousel({
-    loop: true,
-    margin: 20,
-    responsiveClass: true,
-    responsive: {
-        0: {
-            items: 2,
-            nav: false,
-            autoplay: true,
-        },
-        600: {
-            items: 4,
-            nav: true,
-            autoplay: true,
-        },
-        1000: {
-            items: 6,
-            nav: true,
+// Initialize Owl Carousel for sliders
+$(document).ready(function(){
+    if ($('.owl-carousel').length) {
+        $('.owl-carousel').owlCarousel({
             loop: true,
-            autoplay: true,
-        }
+            margin: 10,
+            nav: true,
+            responsive: {
+                0: { items: 1 },
+                600: { items: 3 },
+                1000: { items: 5 }
+            }
+        });
     }
-})
 
-$('.plus-cart').click(function () {
-    var id = $(this).attr("pid").toString();
-    var eml = this.parentNode.children[2]
-    $.ajax({
-        type: "GET",
-        url: "/pluscart",
-        data: {
-            prod_id: id
-        },
-        success: function (data) {
-            eml.innerText = data.quantity
-            document.getElementById("amount").innerText = data.amount
-            document.getElementById("totalamount").innerText = data.totalamount
+    // Get CSRF token from cookie
+    function getCookie(name) {
+        let cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            const cookies = document.cookie.split(';');
+            for (let i = 0; i < cookies.length; i++) {
+                const cookie = cookies[i].trim();
+                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
         }
-    })
-})
+        return cookieValue;
+    }
+    const csrftoken = getCookie('csrftoken');
 
-$('.minus-cart').click(function () {
-    var id = $(this).attr("pid").toString();
-    var eml = this.parentNode.children[2]
-    $.ajax({
-        type: "GET",
-        url: "/minuscart",
-        data: {
-            prod_id: id
-        },
-        success: function (data) {
-            eml.innerText = data.quantity
-            document.getElementById("amount").innerText = data.amount
-            document.getElementById("totalamount").innerText = data.totalamount
+    // Function to handle cart operations
+    function handleCartOperation(url, productId) {
+        console.log('Handling cart operation:', url, 'for product:', productId);
+        
+        if (!productId) {
+            console.error('Product ID not found');
+            return;
         }
-    })
-})
 
+        $.ajax({
+            url: url,
+            type: 'POST',
+            headers: {
+                'X-CSRFToken': csrftoken
+            },
+            data: {
+                prod_id: productId
+            },
+            success: function(data) {
+                console.log('Cart operation response:', data);
+                try {
+                    if (typeof data === 'string') {
+                        data = JSON.parse(data);
+                    }
+                    
+                    if (data.status === 'success') {
+                        const cartItem = $(`#cart-item-${productId}`);
+                        
+                        if (data.quantity === 0 || url === '/removecart/') {
+                            // Remove the item from the cart
+                            cartItem.fadeOut(300, function() {
+                                $(this).remove();
+                                // Update cart totals after removal
+                                $('#amount').text('$' + data.amount);
+                                $('#totalamount').text('$' + data.totalamount);
+                                
+                                // If cart is empty, reload the page
+                                if ($('.cart-item').length === 0) {
+                                    location.reload();
+                                }
+                            });
+                        } else {
+                            // Update quantity display
+                            $(`#quantity-${productId}`).text(data.quantity);
+                            cartItem.find('.quantity-controls span.mx-2').text(data.quantity);
+                            
+                            // Update total for the specific product
+                            $(`#total-${productId}`).text('$' + data.total);
+                            
+                            // Update cart totals
+                            $('#amount').text('$' + data.amount);
+                            $('#totalamount').text('$' + data.totalamount);
+                        }
+                    } else {
+                        console.error('Error:', data.message || 'Unknown error occurred');
+                    }
+                } catch (e) {
+                    console.error('Error parsing response:', e);
+                }
+            },
+            error: function(xhr, status, error) {
+                console.error('AJAX Error:', error);
+                console.error('Status:', status);
+                console.error('Response:', xhr.responseText);
+            }
+        });
+    }
 
-$('.remove-cart').click(function () {
-    var id = $(this).attr("pid").toString();
-    var eml = this
-    $.ajax({
-        type: "GET",
-        url: "/removecart",
-        data: {
-            prod_id: id
-        },
-        success: function (data) {
-            document.getElementById("amount").innerText = data.amount
-            document.getElementById("totalamount").innerText = data.totalamount
-            eml.parentNode.parentNode.parentNode.parentNode.remove()
-        }
-    })
-})
+    // Plus Cart
+    $(document).on('click', '.plus-cart', function(e) {
+        e.preventDefault();
+        const productId = $(this).data('product-id');
+        console.log('Plus cart clicked for product:', productId);
+        handleCartOperation('/pluscart/', productId);
+    });
 
+    // Minus Cart
+    $(document).on('click', '.minus-cart', function(e) {
+        e.preventDefault();
+        const productId = $(this).data('product-id');
+        console.log('Minus cart clicked for product:', productId);
+        handleCartOperation('/minuscart/', productId);
+    });
 
-$('.plus-wishlist').click(function () {
-    var id = $(this).attr("pid").toString();
-    $.ajax({
-        type: "GET",
-        url: "/pluswishlist",
-        data: {
-            prod_id: id
-        },
-        success: function (data) {
-            //alert(data.message)
-            window.location.href = `http://localhost:8000/product-detail/${id}`
-        }
-    })
-})
-
-
-$('.minus-wishlist').click(function () {
-    var id = $(this).attr("pid").toString();
-    $.ajax({
-        type: "GET",
-        url: "/minuswishlist",
-        data: {
-            prod_id: id
-        },
-        success: function (data) {
-            window.location.href = `http://localhost:8000/product-detail/${id}`
-        }
-    })
-})
-
-$('.plus-wishlist').click(function(){
-    var id = $(this).attr("pid").toString();
-    $.ajax({
-        type: "GET",
-        url: "/pluswishlist",
-        data:{
-            prod_id:id
-        },
-        success:function (data){
-            //alert(data.message)
-            window.location.href = `http://localhost:8000/product-detail/${id}`
-        }
-    })
-})
-
-$('.minus-wishlist').click(function () {
-    var id = $(this).attr("pid").toString();
-    $.ajax({
-        type: "GET",
-        url: "/minuswishlist",
-        data: {
-            prod_id: id
-        },   
-        success: function (data) {
-            window.location.href = `http://localhost:8000/product-detail/${id}`
-        }
-    })
-})   
+    // Remove Cart
+    $(document).on('click', '.remove-cart', function(e) {
+        e.preventDefault();
+        const productId = $(this).data('product-id');
+        console.log('Remove cart clicked for product:', productId);
+        handleCartOperation('/removecart/', productId);
+    });
+});   

@@ -1,43 +1,41 @@
 {% extends "app/base.html" %}
 {% load static %}
-{% block title %}Category{% endblock title %}
+{% block title %}{{ category_name }}{% endblock title %}
 
 {% block main-content %}
 <div class="container">
-  <div class="row">
-    <div class="col-sm-3" style="margin-top: 24px;">
-        <div class="list-group">
-            {% for val in  title %}
-                <a href="{% url 'category-title' val.title %}" class="list-group-item list-group-item-action" aria-current="true">
-                    {{val.title}}
-                </a>
-            {% endfor %}
-        </div>
-    </div>
-    <div class="col-sm-9">
-        <div class="row">
-            {% for prod in product %}
-            <div class="col text-center mb-4" style="margin-top: 24px;">
-                <a href="{% url 'product-detail' prod.id %}" class="btn">
-                    <div>
-                        <div class="img-container">
-                            <img src="{{prod.product_image.url}}"
-                                 style="max-width: 250px; max-height: 200px; width: 100%; height: 200px; display: block; margin: 0 auto;"
-                                 alt="{{prod.title}}">
-                            <div class="fw-bold">{{prod.title}}</div>
-                        </div>
-                        <div class="fw-bold text-danger">
-                            EGP.{{prod.discounted_price}}/-
-                            <small class="fw-light text-decoration-line-through">
-                                {{prod.selling_price}}
-                            </small>
-                        </div>
+    <h2 class="text-center mb-4">{{ category_name }}</h2>
+    
+    {% if products %}
+    <div class="row">
+        {% for product in products %}
+        <div class="col-md-3 mb-4">
+            <div class="card h-100">
+                <img src="{{ product.product_image.url }}" class="card-img-top" alt="{{ product.title }}" style="height: 200px; object-fit: cover;">
+                <div class="card-body">
+                    <h5 class="card-title">{{ product.title }}</h5>
+                    <p class="card-text text-muted">{{ product.brand }}</p>
+                    <p class="card-text">${{ product.selling_price }}</p>
+                    <div class="d-flex justify-content-between">
+                        <a href="{% url 'product-detail' product.id %}" class="btn btn-primary">View Details</a>
+                        {% if product.status == 'available' %}
+                        <form action="{% url 'add_to_cart' %}" method="get" class="d-inline">
+                            <input type="hidden" name="prod_id" value="{{ product.id }}">
+                            <button type="submit" class="btn btn-success">Add to Cart</button>
+                        </form>
+                        {% else %}
+                        <button class="btn btn-secondary" disabled>Sold Out</button>
+                        {% endif %}
                     </div>
-                </a>
+                </div>
             </div>
-            {% endfor %}
         </div>
+        {% endfor %}
     </div>
-  </div>
+    {% else %}
+    <div class="text-center">
+        <p class="lead">No products found in this category.</p>
+    </div>
+    {% endif %}
 </div>
 {% endblock main-content %}

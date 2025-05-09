@@ -1,0 +1,97 @@
+{% extends 'app/base.html' %}
+{% load static %}
+{% block title %}My Wallet{% endblock title %}
+{% block main-content %}
+<div class="container my-5">
+    <div class="row">
+        <div class="col-sm-3">
+            <div class="list-group">
+                <a href="{% url 'profile' %}" class="list-group-item list-group-item-action">Profile</a>
+                <a href="{% url 'wallet' %}" class="list-group-item list-group-item-action active">My Wallet</a>
+                <a href="{% url 'seller-dashboard' %}" class="list-group-item list-group-item-action">My Products</a>
+                <a href="{% url 'orders' %}" class="list-group-item list-group-item-action">Orders</a>
+            </div>
+        </div>
+        <div class="col-sm-9">
+            <div class="card shadow mb-4">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <h3 class="card-title">My Wallet</h3>
+                        <h2 class="text-success">${{ user_account.balance }}</h2>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="card bg-light">
+                                <div class="card-body">
+                                    <h5 class="card-title">Add Coins</h5>
+                                    <form method="post" action="{% url 'add-coins' %}">
+                                        {% csrf_token %}
+                                        <div class="mb-3">
+                                            <label for="amount" class="form-label">Amount ($)</label>
+                                            <input type="number" class="form-control" id="amount" name="amount" min="1" step="0.01" required>
+                                        </div>
+                                        <button type="submit" class="btn btn-primary">Add Coins</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Transaction History -->
+            <div class="card shadow">
+                <div class="card-body">
+                    <h4 class="card-title mb-4">Transaction History</h4>
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Type</th>
+                                    <th>Description</th>
+                                    <th>Amount</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for transaction in transactions %}
+                                <tr>
+                                    <td>{{ transaction.created_at|date:"M d, Y" }}</td>
+                                    <td>
+                                        <span class="badge {% if transaction.transaction_type == 'deposit' %}bg-success{% elif transaction.transaction_type == 'purchase' %}bg-danger{% else %}bg-info{% endif %}">
+                                            {{ transaction.transaction_type|title }}
+                                        </span>
+                                    </td>
+                                    <td>
+                                        {% if transaction.product %}
+                                            {% if transaction.transaction_type == 'purchase' %}
+                                                Purchased {{ transaction.product.title }}
+                                            {% else %}
+                                                Sold {{ transaction.product.title }}
+                                            {% endif %}
+                                        {% else %}
+                                            Wallet deposit
+                                        {% endif %}
+                                    </td>
+                                    <td>${{ transaction.amount }}</td>
+                                    <td>
+                                        <span class="badge {% if transaction.status == 'completed' %}bg-success{% elif transaction.status == 'pending' %}bg-warning{% else %}bg-danger{% endif %}">
+                                            {{ transaction.status|title }}
+                                        </span>
+                                    </td>
+                                </tr>
+                                {% empty %}
+                                <tr>
+                                    <td colspan="5" class="text-center">No transactions yet</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock main-content %} 

@@ -1,0 +1,106 @@
+{% extends 'app/base.html' %}
+{% load static %}
+{% load custom_filters %}
+{% block title %}Transaction Report{% endblock title %}
+{% block main-content %}
+<div class="container my-5">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card shadow">
+                <div class="card-header bg-primary text-white">
+                    <h3 class="mb-0">Transaction Report</h3>
+                </div>
+                <div class="card-body">
+                    <!-- Summary Statistics -->
+                    <div class="row mb-4">
+                        <div class="col-md-4">
+                            <div class="card bg-light">
+                                <div class="card-body text-center">
+                                    <h5>Total Spent</h5>
+                                    <h3 class="text-danger">${{ total_spent|floatformat:2 }}</h3>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card bg-light">
+                                <div class="card-body text-center">
+                                    <h5>Total Earned</h5>
+                                    <h3 class="text-success">${{ total_earned|floatformat:2 }}</h3>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card bg-light">
+                                <div class="card-body text-center">
+                                    <h5>Total Deposits</h5>
+                                    <h3 class="text-primary">${{ total_deposits|floatformat:2 }}</h3>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Monthly Statistics -->
+                    <h4 class="mb-3">Monthly Breakdown</h4>
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Month</th>
+                                    <th>Spent</th>
+                                    <th>Earned</th>
+                                    <th>Deposits</th>
+                                    <th>Net</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for stat in monthly_stats %}
+                                <tr>
+                                    <td>{{ stat.month|date:"F Y" }}</td>
+                                    <td class="text-danger">${{ stat.total_spent|default:"0.00"|floatformat:2 }}</td>
+                                    <td class="text-success">${{ stat.total_earned|default:"0.00"|floatformat:2 }}</td>
+                                    <td class="text-primary">${{ stat.total_deposits|default:"0.00"|floatformat:2 }}</td>
+                                    <td class="{% if stat.total_earned|default:0 > stat.total_spent|default:0 %}text-success{% else %}text-danger{% endif %}">
+                                        ${{ stat.total_earned|default:0|sub:stat.total_spent|default:0|floatformat:2 }}
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Recent Transactions -->
+                    <h4 class="mb-3 mt-4">Recent Transactions</h4>
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Type</th>
+                                    <th>Amount</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for transaction in transactions %}
+                                <tr>
+                                    <td>{{ transaction.created_at|date:"M d, Y H:i" }}</td>
+                                    <td>{{ transaction.transaction_type|title }}</td>
+                                    <td class="{% if transaction.transaction_type == 'purchase' %}text-danger{% elif transaction.transaction_type == 'sale' %}text-success{% else %}text-primary{% endif %}">
+                                        ${{ transaction.amount|floatformat:2 }}
+                                    </td>
+                                    <td>
+                                        <span class="badge {% if transaction.status == 'completed' %}bg-success{% else %}bg-warning{% endif %}">
+                                            {{ transaction.status|title }}
+                                        </span>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock main-content %} 
